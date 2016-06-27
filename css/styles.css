@@ -1,0 +1,20 @@
+
+#search-form, .form-control {
+    margin-bottom: 20px;
+}
+
+.cover {
+    width: 200px;
+    height: 200px;
+    display: inline-block;
+    background-size: cover;
+    padding: 10px;
+}
+
+.cover:hover {
+    cursor: pointer;
+}
+
+.cover.playing {
+    border: 5px solid teal;
+}

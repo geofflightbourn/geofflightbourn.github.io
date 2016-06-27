@@ -1,76 +1,86 @@
-<!doctype html>
-<html class="no-js" lang="">
+<!DOCTYPE html>
+ <html>
+   <head>
+     <meta charset="utf-8"/>
+     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+     <link type="text/css" rel="stylesheet" href="css/styles.css"/>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+     <title>Artist Finder</title>
+   </head>
+   <body>
 
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      <title>Feedr @ GA</title>
-      <link rel="stylesheet" href="styles/normalize.css" media="screen" charset="utf-8">
-      <link rel="stylesheet" href="styles/html5bp.css" media="screen" charset="utf-8">
-      <link rel="stylesheet" href="styles/style.css" media="screen" charset="utf-8">
-      <meta name="description" content="">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+     <div class="container">
 
-    </head>
+       <div class="col s12 center">
+         <h1>Artist Finder</h1>
+       </div>
 
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <div class="row">
 
-        <header>
-          <section class="container">
-            <a href="#"><h1>Feedr</h1></a>
-            <nav>
-              <ul>
-                <li><a href="#">News Source: Digg<span></span></a>
-                  <ul>
-                      <li><a href="#" class="diggClick">Digg</a></li>
-                      <li><a href="reddit.html" class="redditClick">/r/gaming</a></li>
-                  </ul>
-                </li>
-              </ul>
-              <section id="search">
-                <input type="text" name="name" value="">
-                <a href="#"><img src="images/search.png" alt="" /></a>
-              </section>
-            </nav>
-            <div class="clearfix"></div>
-          </section>
-        </header>
+      <div class="col s12 center-align">
+      <form id="search-form" method="post">
+        <input type="text" id="query" value="" class="form-control center-align" />
+        <input type="submit" id="search" class="btn btn-primary waves-effect waves-teal" value="Search" />
+    </form>
+</div>
 
-        <div id="popUp" class="loader hidden">
-        <a href="#" class="closePopUp">X</a>
-        <div class="container">
-        </div>
+
+  <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">perm_identity</i>About</div>
+      <div class="collapsible-body center-align" id="artistStats"></div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">info_outline</i>Stats</div>
+      <div class="collapsible-body center-align" id="albumStats">
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">queue_music</i>Album</div>
+      <div class="collapsible-body center-align">
+          <iframe
+            id="player"
+            src="https://embed.spotify.com/?uri=spotify%3Aalbum%3A2rp5riHULWgrXPsDtsp1ir&theme=white"
+            width="300" height="380" frameborder="0" allowtransparency="true"
+            >
+          </iframe>
+      </div>
+    </li>
+  </ul>
+
+      <div class="" id="results">
+
       </div>
 
-        <section id="main" class="container" "loader"></section>
+      <div id="loadingDiv" class="progress">
+    <div class="indeterminate"></div>
+      </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js'></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
-        <script src="js/app.js"></script>
 
-        <script id="newsTemp" type="text/x-handlebars-template">
-      <article class="article">
-        <section class="featuredImage">
-          <img src={{content.media.images.0.url}} alt="" />
-        </section>
-        <section class="articleContent">
-            <a href="#" class="contentHeader">
-              <h3 class="title">{{content.title}}</h3>
-            </a>
-            <h6>{{#each content.tags}}
-                {{this.display}}
-                {{/each}}</h6>
-        </section>
-        <section class="impressions">
-          {{digg_score}}
-        </section>
-        <div class="clearfix"></div>
-      </article>
-    </script>
+     </div> <!-- end row -->
+   </div> <!-- end container -->
 
-    </body>
-</html>
+
+
+
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js'></script>
+     <script type="text/javascript" src="js/materialize.min.js"></script>
+     <script type="text/javascript" src="js/custom.js"></script>
+
+     <script id="results-template" type="text/x-handlebars-template">
+       <br>
+    {{#each albums.items}}
+    {{log this}}
+    <div
+    style="background-image:url({{images.0.url}})"
+    data-album-id="{{id}}"
+    data-artist-id="{{id}}"
+    data-album-releaseDate="{{release_date}}"
+    class="cover col s3"></div>
+    {{/each}}
+     </script>
+
+   </body>
+ </html>
